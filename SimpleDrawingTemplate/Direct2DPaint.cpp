@@ -55,6 +55,7 @@ Direct2DPaint::Direct2DPaint(HWND hWnd) :
 	m_pRenderTarget(NULL)
 {
 	CreateDeviceIndependentResources();
+	CreateDeviceResources();
 }
 
 Direct2DPaint::~Direct2DPaint()
@@ -71,7 +72,6 @@ void Direct2DPaint::RecalculateWindowSizes()
 		// This method can fail, but it's okay to ignore because the error will be returned again the next time EndDraw is called.
 		m_pRenderTarget->Resize(D2D1::SizeU(this->GetPaintingWidth(), this->GetPaintingHeight()));
 	}
-	CreateDeviceResources();
 }
 
 void Direct2DPaint::Paint()
