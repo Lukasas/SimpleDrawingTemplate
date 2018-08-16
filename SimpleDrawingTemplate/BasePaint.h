@@ -65,8 +65,6 @@ class BasePaint
 private:
 	HWND hWnd;
 	HDC hdc;
-	HBITMAP hbmp;
-	HBITMAP oldhbmp;
 	RECT windowRect;
 
 	MouseEventFn fDown;
@@ -81,27 +79,29 @@ private:
 
 	DrawingMode eDraw;
 protected:
-	HDC hdcmem;
 public:
 
 	BasePaint(HWND hWnd);
 
-	inline int WindowWidth() const;
-	inline int WindowHeight() const;
+	inline int GetWindowWidth() const;
+	inline int GetWindowHeight() const;
 
-	inline int PaintingWidth() const;
-	inline int PaintingHeight() const;
+	inline int GetPaintingWidth() const;
+	inline int GetPaintingHeight() const;
 
-	inline void RecalculateWindowSizes();
 
 	inline RECT WindowRect();
 	void ResizePainting(const int width, const int height);
-	virtual void CreateDrawingContent(const int width, const int height);
+	inline HWND GetWindowHandle() const;
 	inline void SetWindowHandle(HWND hWnd);
 
-	void Cleanup();
+	inline HDC GetWindowDC() const;
+
+	virtual void Cleanup();
+	virtual void RecalculateWindowSizes();
 	virtual ~BasePaint();
 
+	virtual void SetupRenderer() = 0;
 	virtual void Setup() = 0;
 	virtual void Render() = 0;
 
@@ -127,41 +127,40 @@ public:
 
 };
 
-int BasePaint::WindowWidth() const 
+int BasePaint::GetWindowWidth() const
 {
 	return this->width;
 }
 
-int BasePaint::WindowHeight() const
+int BasePaint::GetWindowHeight() const
 {
 	return this->height;
 }
 
-int BasePaint::PaintingWidth() const
+int BasePaint::GetPaintingWidth() const
 {
 	return this->paintingWidth;
 }
 
-int BasePaint::PaintingHeight() const
+int BasePaint::GetPaintingHeight() const
 {
 	return this->paintingHeight;
 }
 
-inline void BasePaint::RecalculateWindowSizes()
-{
-	GetClientRect(this->hWnd, &this->windowRect);
-	this->width = this->windowRect.right - this->windowRect.left;
-	this->height = this->windowRect.bottom - this->windowRect.top;
-
-	if (this->eDraw == Fullscreen)
-	{
-		this->ResizePainting(this->width, this->height);
-	}
-}
 
 inline RECT BasePaint::WindowRect()
 {
 	return this->windowRect;
+}
+
+inline HWND BasePaint::GetWindowHandle() const
+{
+	return this->hWnd;
+}
+
+inline HDC BasePaint::GetWindowDC() const
+{
+	return this->hdc;
 }
 
 inline void BasePaint::SetWindowHandle(const HWND hWnd )
@@ -169,7 +168,6 @@ inline void BasePaint::SetWindowHandle(const HWND hWnd )
 	this->hWnd = hWnd;
 	this->hdc = GetDC(hWnd);
 	RecalculateWindowSizes();
-	CreateDrawingContent(this->width, this->height);
 }
 
 inline void BasePaint::SetDrawingMode(DrawingMode mode)

@@ -1,5 +1,5 @@
 #pragma once
-#define GDI_PLUS_PAINT
+//#define GDI_PLUS_PAINT
 #ifdef GDI_PLUS_PAINT
 
 #include "GdiPlusPaint.h"

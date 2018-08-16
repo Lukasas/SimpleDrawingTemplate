@@ -4,13 +4,53 @@
 
 GdiPaint::GdiPaint(HWND hWnd) : BasePaint(hWnd)
 {
+	SetupRenderer();
 }
 
 
 GdiPaint::~GdiPaint()
 {
+	Cleanup();
 }
 
+void GdiPaint::RecalculateWindowSizes()
+{
+	BasePaint::RecalculateWindowSizes();
+	SetupRenderer();
+}
+
+void GdiPaint::Cleanup()
+{
+	if (!this->hdcmem)
+	{
+		SelectObject(this->hdcmem, this->oldhbmp);
+		DeleteDC(this->hdcmem);
+	}
+
+	if (!this->hbmp)
+	{
+		DeleteObject(this->hbmp);
+	}
+}
+
+void GdiPaint::Paint()
+{
+	BasePaint::Paint();
+	StretchBlt(this->GetWindowDC(), 0, 0, this->GetWindowWidth(), this->GetWindowHeight(), this->hdcmem, 0, 0, this->GetPaintingWidth(), this->GetPaintingHeight(), SRCCOPY);
+}
+
+void GdiPaint::SetupRenderer()
+{
+	Cleanup();	
+
+	this->hdcmem = CreateCompatibleDC(GetWindowDC());
+	this->hbmp = CreateCompatibleBitmap(GetWindowDC(), this->GetPaintingWidth(), this->GetPaintingHeight());
+
+	this->oldhbmp = (HBITMAP)SelectObject(this->hdcmem, this->hbmp); 
+
+	SelectObject(this->hdcmem, GetStockObject(DC_BRUSH));
+	SelectObject(this->hdcmem, GetStockObject(DC_PEN));
+}
 
 HBRUSH GdiPaint::CreateBrush(COLORREF color)
 {

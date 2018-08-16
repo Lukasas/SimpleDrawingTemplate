@@ -15,13 +15,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szCmdLine
 	wc.hIconSm = LoadIcon(0, IDI_APPLICATION);
 	wc.hInstance = hInstance;
 	wc.lpfnWndProc = WndProc;
-	wc.lpszClassName = "SimpleDrawingTemplate";
+	wc.lpszClassName = "$safeprojectname$";
 	wc.lpszMenuName = 0;
 	wc.style = CS_HREDRAW | CS_VREDRAW;
 
 	RegisterClassEx(&wc);
 
-	HWND hWnd = CreateWindowEx(0, "SimpleDrawingTemplate", "SimpleDrawingTemplate", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, HWND_DESKTOP, 0, hInstance, NULL);
+	HWND hWnd = CreateWindowEx(0, "$safeprojectname$", "$projectname$", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 800, 600, HWND_DESKTOP, 0, hInstance, NULL);
 
 	cBasePaint = new PaintClass(hWnd);
 	ShowWindow(hWnd, nCmdShow);

@@ -23,17 +23,17 @@ void GdiPlusPaint::Line(int startX, int startY, int endX, int endY, COLORREF col
 
 void GdiPlusPaint::Pixel(int x, int y, COLORREF color) 
 {
-	if (x > WindowWidth() || y > WindowHeight() || x < 0 || y < 0)
+	if (x > GetWindowWidth() || y > GetWindowHeight() || x < 0 || y < 0)
 		return;
 	this->bmp->LockBits(NULL, ImageLockModeWrite, this->bmp->GetPixelFormat(), bd);
-	((int*)bd->Scan0)[x + WindowWidth() * y] = 0xFF000000 | color;
+	((int*)bd->Scan0)[x + GetWindowWidth() * y] = 0xFF000000 | color;
 	this->bmp->UnlockBits(bd);
 }
 	 
 void GdiPlusPaint::SetBackground(COLORREF color)
 {
 	SetBrushColor(color);
-	this->pMemGraphics->FillRectangle(brush, 0, 0, this->WindowWidth(), this->WindowHeight());
+	this->pMemGraphics->FillRectangle(brush, 0, 0, this->GetWindowWidth(), this->GetWindowHeight());
 }
 
 void GdiPlusPaint::Rectangle(int x, int y, int width, int height, COLORREF pen) 
@@ -102,10 +102,10 @@ void GdiPlusPaint::CreateDrawingContent(const int width, const int height)
 	if (this->bmp)
 		delete this->bmp;
 
-	BasePaint::CreateDrawingContent(width, height);
+	/*BasePaint::CreateDrawingContent(width, height);
 	bmp = new Bitmap(width, height);
 	this->pMemGraphics = Graphics::FromImage(bmp);
-	this->pGraphics = Graphics::FromHDC(hdcmem);
+	this->pGraphics = Graphics::FromHDC(hdcmem);*/
 }
 
 void GdiPlusPaint::Paint()

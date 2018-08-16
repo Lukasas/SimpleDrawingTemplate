@@ -13,41 +13,32 @@ void BasePaint::ResizePainting(const int width, const int height)
 {
 	this->paintingWidth = width;
 	this->paintingHeight = height;
-
-	CreateDrawingContent(this->paintingWidth, this->paintingHeight);
 }
 
-void BasePaint::CreateDrawingContent(const int width, const int height)
-{
-	Cleanup();	
-
-	this->hdcmem = CreateCompatibleDC(GetDC(this->hWnd));
-	this->hbmp = CreateCompatibleBitmap(GetDC(this->hWnd), width, height);
-
-	this->oldhbmp = (HBITMAP)SelectObject(this->hdcmem, this->hbmp); 
-
-	SelectObject(this->hdcmem, GetStockObject(DC_BRUSH));
-	SelectObject(this->hdcmem, GetStockObject(DC_PEN));
-}
 
 
 void BasePaint::Cleanup()
 {
-	if (!this->hdcmem)
+
+}
+
+void BasePaint::RecalculateWindowSizes()
+{
+	GetClientRect(this->hWnd, &this->windowRect);
+	this->width = this->windowRect.right - this->windowRect.left;
+	this->height = this->windowRect.bottom - this->windowRect.top;
+	this->paintingWidth = this->width;
+	this->paintingHeight = this->height;
+	if (this->eDraw == Fullscreen)
 	{
-		SelectObject(this->hdcmem, this->oldhbmp);
-		DeleteDC(this->hdcmem);
-	}
-	
-	if (!this->hbmp)
-	{
-		DeleteObject(this->hbmp);
+		this->ResizePainting(this->width, this->height);
 	}
 }
 
 BasePaint::~BasePaint()
 {
 	Cleanup();
+	ReleaseDC(this->hWnd, hdc);
 }
 
 void BasePaint::RegisterMouseEvent(MouseEventFn f, MouseEvent event)
@@ -83,9 +74,6 @@ void BasePaint::SendMousePressEvent(MouseButton mb, MouseEvent event, Position p
 void BasePaint::Paint()
 {
 	Render();
-	
-	StretchBlt(this->hdc, 0, 0, this->width, this->height, this->hdcmem, 0, 0, this->paintingWidth, this->paintingHeight, SRCCOPY);
-	
 }
 
 

@@ -10,11 +10,21 @@ private:
 
 	HBRUSH CreateBrush(COLORREF color);
 	void DestroyBrush(HBRUSH brush);
+
+
+	HBITMAP hbmp;
+	HBITMAP oldhbmp;
+	HDC hdcmem;
 public:
 	GdiPaint(HWND hWnd);
+
+
 	virtual ~GdiPaint();
 
-
+	virtual void RecalculateWindowSizes();
+	virtual void Cleanup();
+	virtual void Paint();
+	virtual void SetupRenderer();
 	/* Drawing Functions */
 
 	void Line(int startX, int startY, int endX, int endY, COLORREF color = 0);
