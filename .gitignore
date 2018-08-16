@@ -1,0 +1,35 @@
+*.opensdf
+*.opendb
+*.sdf
+*.suo
+*.ilk
+*.pbd
+*.exe
+*.vcxproj.filters
+*.tlog
+*.obj
+*.idb
+*.lastbuildstate
+Thumbs.db
+
+#ignore thumbnails created by windows
+#Ignore files build by Visual Studio
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.tlb
+*.tlh
+*.bak
+*.cache
+[Bb]in
+[Dd]ebug*/
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+[Tt]est[Rr]esult*
