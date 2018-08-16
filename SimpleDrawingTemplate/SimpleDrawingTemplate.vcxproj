@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasePaint.cpp" />
+    <ClCompile Include="Direct2DPaint.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PaintClass.cpp" />
     <ClCompile Include="GdiPaint.cpp" />
@@ -149,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasePaint.h" />
+    <ClInclude Include="Direct2DPaint.h" />
     <ClInclude Include="PaintClass.h" />
     <ClInclude Include="GdiPaint.h" />
     <ClInclude Include="GdiPlusPaint.h" />

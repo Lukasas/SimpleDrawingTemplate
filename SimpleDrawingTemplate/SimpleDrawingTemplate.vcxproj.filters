@@ -30,6 +30,9 @@
     <ClCompile Include="GdiPlusPaint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Direct2DPaint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PaintClass.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GdiPlusPaint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Direct2DPaint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
