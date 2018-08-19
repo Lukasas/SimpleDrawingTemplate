@@ -1,0 +1,1 @@
+Simple Drawing Template that allows easy drawing with WINAPI.
