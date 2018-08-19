@@ -1,0 +1,32 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Simple Drawing Template</Name>
+    <Description>Wrapper for easy drawing with C++ WinAPI. Currently Drawing with Direct2D.</Description>
+    <ProjectType>VC</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>SimpleDrawingTemplate</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="SimplePaintingTemplate.vcxproj" File="SimplePaintingTemplate.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="false" TargetFileName="$projectname$.vcxproj.filters">SimplePaintingTemplate.vcxproj.filters</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="BasePaint.cpp">BasePaint.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="BasePaint.h">BasePaint.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="GdiPaint.h">GdiPaint.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="GdiPaint.cpp">GdiPaint.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="GdiPlusPaint.h">GdiPlusPaint.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="GdiPlusPaint.cpp">GdiPlusPaint.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="main.cpp">main.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Direct2DPaint.h">Direct2DPaint.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Direct2DPaint.cpp">Direct2DPaint.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="PaintClass.h" OpenInEditor="true">PaintClass.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="PaintClass.cpp" OpenInEditor="true">PaintClass.cpp</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>
