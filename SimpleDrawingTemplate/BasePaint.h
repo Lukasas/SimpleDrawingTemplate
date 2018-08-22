@@ -56,9 +56,9 @@ struct Size
 	}
 };
 
-typedef void(*MouseEventFn)(MouseButton mb, Position p) ;
 
-typedef char Mouse;
+using MouseEventFn = auto(*) (MouseButton mb, Position p) -> void;
+using Mouse = char;
 
 class BasePaint
 {
