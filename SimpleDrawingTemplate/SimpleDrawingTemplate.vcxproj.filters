@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\DrawingMethods">
+      <UniqueIdentifier>{4624115a-a9e9-4deb-ac7f-09aea91fefa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DrawingMethods">
+      <UniqueIdentifier>{e03febd8-7480-4860-9b94-e2a9297133c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,14 +30,14 @@
     <ClCompile Include="BasePaint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GdiPaint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GdiPlusPaint.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DrawingMethods</Filter>
+    </ClCompile>
+    <ClCompile Include="GdiPaint.cpp">
+      <Filter>Source Files\DrawingMethods</Filter>
     </ClCompile>
     <ClCompile Include="Direct2DPaint.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\DrawingMethods</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,14 +47,14 @@
     <ClInclude Include="BasePaint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Direct2DPaint.h">
+      <Filter>Header Files\DrawingMethods</Filter>
+    </ClInclude>
     <ClInclude Include="GdiPaint.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\DrawingMethods</Filter>
     </ClInclude>
     <ClInclude Include="GdiPlusPaint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Direct2DPaint.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\DrawingMethods</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

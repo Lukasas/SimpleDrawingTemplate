@@ -7,7 +7,6 @@ GdiPaint::GdiPaint(HWND hWnd) : BasePaint(hWnd)
 	SetupRenderer();
 }
 
-
 GdiPaint::~GdiPaint()
 {
 	Cleanup();
@@ -41,7 +40,7 @@ void GdiPaint::Paint()
 
 void GdiPaint::SetupRenderer()
 {
-	Cleanup();	
+	Cleanup();
 
 	this->hdcmem = CreateCompatibleDC(GetWindowDC());
 	this->hbmp = CreateCompatibleBitmap(GetWindowDC(), this->GetPaintingWidth(), this->GetPaintingHeight());
@@ -116,7 +115,6 @@ void GdiPaint::Ellipse(int x, int y, int width, int height, COLORREF pen, COLORR
 	Ellipse(x, y, width, height, pen);
 	ResetBrushColor();
 }
-
 
 void GdiPaint::SetPenColor(COLORREF color)
 {

@@ -24,6 +24,8 @@ public:
 	
 	virtual void CreateDrawingContent(const int width, const int height);
 	virtual void Paint();
+	virtual void SetupRenderer();
+	virtual void RecalculateWindowSizes();
 	/* Drawing Functions */
 
 	void Line(int startX, int startY, int endX, int endY, COLORREF color = 0);
@@ -37,5 +39,6 @@ public:
 
 	void SetPenColor(COLORREF color);
 	void SetBrushColor(COLORREF color);
+
 };
 

@@ -5,14 +5,7 @@ using namespace Gdiplus;
 
 GdiPlusPaint::GdiPlusPaint(HWND hWnd) : BasePaint(hWnd)
 {
-	GdiplusStartup(&this->gdiplusToken, &this->gdiplusStartupInput, NULL);
-	
-	this->pen = new Pen(Color(255, 0, 0, 0));
-	this->brush = new SolidBrush(Color(255, 0, 0, 0));
-	this->bmp = NULL;
-	this->pGraphics = NULL;
-	this->pMemGraphics = NULL;
-	this->bd = new BitmapData();
+	SetupRenderer();
 }
 
 void GdiPlusPaint::Line(int startX, int startY, int endX, int endY, COLORREF color)
@@ -105,7 +98,7 @@ void GdiPlusPaint::CreateDrawingContent(const int width, const int height)
 	/*BasePaint::CreateDrawingContent(width, height);
 	bmp = new Bitmap(width, height);
 	this->pMemGraphics = Graphics::FromImage(bmp);
-	this->pGraphics = Graphics::FromHDC(hdcmem);*/
+	this->pGraphics = Graphics::FromHDC(hdc);*/
 }
 
 void GdiPlusPaint::Paint()
@@ -113,4 +106,23 @@ void GdiPlusPaint::Paint()
 	//BitBlt(hdcmem, 0, 0, WindowWidth(), WindowHeight(), this->graphics->GetHDC(), 0, 0, SRCCOPY);
 	pGraphics->DrawImage(bmp, 0, 0);
 	BasePaint::Paint();
+}
+
+void GdiPlusPaint::SetupRenderer()
+{
+	GdiplusStartup(&this->gdiplusToken, &this->gdiplusStartupInput, NULL);
+
+	this->pen = new Pen(Color(255, 0, 0, 0));
+	this->brush = new SolidBrush(Color(255, 0, 0, 0));
+	this->bmp = NULL;
+	this->pGraphics = NULL;
+	this->pMemGraphics = NULL;
+	this->bd = new BitmapData();
+}
+
+void GdiPlusPaint::RecalculateWindowSizes()
+{
+	BasePaint::RecalculateWindowSizes();
+	//SetupRenderer();
+	CreateDrawingContent(this->GetPaintingWidth(), this->GetPaintingHeight());
 }
