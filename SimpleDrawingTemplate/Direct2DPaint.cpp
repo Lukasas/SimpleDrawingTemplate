@@ -129,7 +129,8 @@ void Direct2DPaint::Line(int startX, int startY, int endX, int endY, COLORREF co
 
 void Direct2DPaint::Pixel(int x, int y, COLORREF color)
 {
-	Rectangle(x, y, 1, 1, color); // TODO: Figure out, how to set exact pixel more precisely
+	SetBrushColor(color);
+	m_pRenderTarget->FillRectangle(D2D1::RectF(x, y, x + 1, y + 1), m_pBrush);
 }
 
 void Direct2DPaint::SetBackground(COLORREF color)
