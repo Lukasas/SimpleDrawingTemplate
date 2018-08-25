@@ -7,6 +7,7 @@ BasePaint::BasePaint(HWND hWnd)
 	SetWindowHandle(hWnd);
 	fDown = NULL;
 	fUp = NULL;
+	m_redrawinterval = 16;
 }
 
 void BasePaint::ResizePainting(const int width, const int height)
@@ -74,6 +75,7 @@ void BasePaint::SendMousePressEvent(MouseButton mb, MouseEvent event, Position p
 void BasePaint::Paint()
 {
 	Render();
+	Sleep(this->m_redrawinterval);
 }
 
 

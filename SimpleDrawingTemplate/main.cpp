@@ -36,7 +36,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR szCmdLine
 		else
 		{
 			cBasePaint->Paint();
-			Sleep(16);
 		}
 	delete cBasePaint;
 	return msg.wParam;

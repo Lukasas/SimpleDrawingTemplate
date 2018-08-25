@@ -25,13 +25,9 @@ enum MouseEvent
 
 struct Position
 {
-	size_t x;
-	size_t y;
-	Position() 
-	{
-		x = 0;
-		y = 0;
-	};
+	size_t x = 0;
+	size_t y = 0;
+
 	Position(size_t x, size_t y)
 	{
 		this->x = x;
@@ -41,14 +37,8 @@ struct Position
 
 struct Size
 {
-	size_t width;
-	size_t height;
-	Size()
-	{
-		width = 0;
-		height = 0;
-	}
-
+	size_t width = 0;
+	size_t height = 0;
 	Size(size_t width, size_t height)
 	{
 		this->width = width;
@@ -78,6 +68,8 @@ private:
 
 
 	DrawingMode eDraw;
+
+	int m_redrawinterval;
 protected:
 public:
 
@@ -105,6 +97,7 @@ public:
 	virtual void Setup() = 0;
 	virtual void Render() = 0;
 
+	
 	inline void SetDrawingMode(DrawingMode mode);
 
 
@@ -114,6 +107,8 @@ public:
 
 	virtual void Paint();
 
+	inline int GetRedrawInterval() const;
+	inline void SetRedrawInterval(const int interval);
 	/* Drawing Functions */
 
 	virtual void Line(int startX, int startY, int endX, int endY, COLORREF color = 0) = 0;
@@ -125,6 +120,7 @@ public:
 	virtual void Ellipse(int x, int y, int width, int height, COLORREF pen) = 0;
 	virtual void Ellipse(int x, int y, int width, int height, COLORREF pen, COLORREF brush) = 0;
 
+	virtual void Text(const char * const string, const Position & pos, COLORREF pen) = 0;
 };
 
 int BasePaint::GetWindowWidth() const
@@ -173,4 +169,15 @@ inline void BasePaint::SetWindowHandle(const HWND hWnd )
 inline void BasePaint::SetDrawingMode(DrawingMode mode)
 {
 	this->eDraw = mode;
+}
+
+
+inline int BasePaint::GetRedrawInterval() const
+{
+	return this->m_redrawinterval;
+}
+
+inline void BasePaint::SetRedrawInterval(const int interval)
+{
+	this->m_redrawinterval = interval;
 }
