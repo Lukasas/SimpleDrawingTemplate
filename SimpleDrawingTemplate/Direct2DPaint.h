@@ -58,7 +58,7 @@ public:
 	virtual void Ellipse(int x, int y, int width, int height, COLORREF pen);
 	virtual void Ellipse(int x, int y, int width, int height, COLORREF pen, COLORREF brush);
 
-	virtual void Text(const char * const string, const Position & pos, COLORREF pen);
+	virtual void Text(const std::wstring & text, const Position & pos, COLORREF pen);
 
 
 	void SetBrushColor(COLORREF color);

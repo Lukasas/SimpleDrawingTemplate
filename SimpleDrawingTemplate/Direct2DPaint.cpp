@@ -55,8 +55,8 @@ void Direct2DPaint::DiscardDeviceResource()
 
 void Direct2DPaint::DrawFPSCounter()
 {
-	Text("FPS: ", Position(10, 10), 0xffffff);
-	Text(std::to_string(1000000000.0 / (std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - start).count())).c_str(), Position(50, 10), 0xffffff);
+	Text(L"FPS: ", Position(10, 10), 0xffffff);
+	Text(std::to_wstring(1000000000.0 / (std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - start).count())).c_str(), Position(50, 10), 0xffffff);
 	start = std::chrono::steady_clock::now();
 
 }
@@ -163,20 +163,15 @@ void Direct2DPaint::Ellipse(int x, int y, int width, int height, COLORREF pen, C
 	Ellipse(x, y, width, height, pen);
 }
 
-void Direct2DPaint::Text(const char * const string, const Position & pos, COLORREF pen)
+void Direct2DPaint::Text(const std::wstring & text, const Position & pos, COLORREF pen)
 {
-	wchar_t *buffer = new wchar_t[strlen(string)+1];
-	size_t converted = 0;
-	mbstowcs(buffer, string, strlen(string)+1);
-
 	SetBrushColor(pen);
 	m_pRenderTarget->DrawTextA(
-		buffer,
-		lstrlenW(buffer),
+		text.c_str(),
+		text.length(),
 		m_pTextFormat,
 		D2D1::RectF(pos.x, pos.y, GetPaintingWidth(), GetPaintingHeight()),
-		m_pBrush) ;
-	delete buffer;
+		m_pBrush);
 }
 
 void Direct2DPaint::SetBrushColor(COLORREF color)

@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include <Shlwapi.h>
+#include <string>
 #pragma comment(lib, "shlwapi.lib")
 
 enum DrawingMode
@@ -120,7 +121,7 @@ public:
 	virtual void Ellipse(int x, int y, int width, int height, COLORREF pen) = 0;
 	virtual void Ellipse(int x, int y, int width, int height, COLORREF pen, COLORREF brush) = 0;
 
-	virtual void Text(const char * const string, const Position & pos, COLORREF pen) = 0;
+	virtual void Text(const std::wstring & text, const Position & pos, COLORREF pen) = 0;
 };
 
 int BasePaint::GetWindowWidth() const
