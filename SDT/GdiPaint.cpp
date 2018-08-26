@@ -45,7 +45,7 @@ void GdiPaint::SetupRenderer()
 	this->hdcmem = CreateCompatibleDC(GetWindowDC());
 	this->hbmp = CreateCompatibleBitmap(GetWindowDC(), this->GetPaintingWidth(), this->GetPaintingHeight());
 
-	this->oldhbmp = (HBITMAP)SelectObject(this->hdcmem, this->hbmp); 
+	this->oldhbmp = (HBITMAP)SelectObject(this->hdcmem, this->hbmp);
 
 	SelectObject(this->hdcmem, GetStockObject(DC_BRUSH));
 	SelectObject(this->hdcmem, GetStockObject(DC_PEN));

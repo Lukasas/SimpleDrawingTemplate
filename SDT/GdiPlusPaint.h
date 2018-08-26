@@ -13,7 +13,7 @@ private:
 	Gdiplus::Graphics				*pMemGraphics;
 	Gdiplus::Bitmap					*bmp;
 	Gdiplus::BitmapData				*bd;
-	
+
 	Gdiplus::Pen					*pen;
 	Gdiplus::SolidBrush				*brush;
 
@@ -21,7 +21,7 @@ private:
 public:
 	GdiPlusPaint(HWND hWnd);
 	virtual ~GdiPlusPaint();
-	
+
 	virtual void CreateDrawingContent(const int width, const int height);
 	virtual void Paint();
 	virtual void SetupRenderer();

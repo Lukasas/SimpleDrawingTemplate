@@ -14,7 +14,7 @@ void GdiPlusPaint::Line(int startX, int startY, int endX, int endY, COLORREF col
 	this->pMemGraphics->DrawLine(pen, startX, startY, endX, endY);
 }
 
-void GdiPlusPaint::Pixel(int x, int y, COLORREF color) 
+void GdiPlusPaint::Pixel(int x, int y, COLORREF color)
 {
 	if (x > GetWindowWidth() || y > GetWindowHeight() || x < 0 || y < 0)
 		return;
@@ -22,14 +22,14 @@ void GdiPlusPaint::Pixel(int x, int y, COLORREF color)
 	((int*)bd->Scan0)[x + GetWindowWidth() * y] = 0xFF000000 | color;
 	this->bmp->UnlockBits(bd);
 }
-	 
+
 void GdiPlusPaint::SetBackground(COLORREF color)
 {
 	SetBrushColor(color);
 	this->pMemGraphics->FillRectangle(brush, 0, 0, this->GetWindowWidth(), this->GetWindowHeight());
 }
 
-void GdiPlusPaint::Rectangle(int x, int y, int width, int height, COLORREF pen) 
+void GdiPlusPaint::Rectangle(int x, int y, int width, int height, COLORREF pen)
 {
 	SetPenColor(pen);
 	this->pMemGraphics->DrawRectangle(this->pen, x, y, width, height);

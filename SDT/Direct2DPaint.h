@@ -10,7 +10,7 @@
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dwrite.lib")
 
-class Direct2DPaint : public BasePaint
+class __declspec(dllexport) Direct2DPaint : public BasePaint
 {
 private:
 	IDWriteFactory * m_pWriteFactory;
@@ -19,7 +19,7 @@ private:
 	ID2D1Factory * m_pDirect2dFactory;
 	ID2D1HwndRenderTarget * m_pRenderTarget;
 	ID2D1SolidColorBrush * m_pBrush;
-	
+
 	// FPS stats
 	std::chrono::time_point<std::chrono::steady_clock> start;
 	bool m_showFPS;
@@ -62,7 +62,7 @@ public:
 
 
 	void SetBrushColor(COLORREF color);
-	
+
 	inline void ShowFPSCounter(bool show);
 };
 

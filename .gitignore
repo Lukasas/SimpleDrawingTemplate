@@ -332,3 +332,9 @@ ASALocalRun/
 .localhistory/
 
 SimpleDrawingTemplate/PaintClass.cpp
+Simple\ Drawing\ Template/**/*.cpp
+Simple\ Drawing\ Template/**/*.h
+Simple\ Drawing\ Template/**/*.lib
+Simple\ Drawing\ Template/**/*.dll
+Simple\ Drawing\ Template.zip
+TemplateConfig/

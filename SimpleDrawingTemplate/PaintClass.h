@@ -8,7 +8,7 @@
 class PaintClass :
 	public GdiPlusPaint
 #elif DIRECTX
-#include "Direct2DPaint.h"
+#include <Direct2DPaint.h>
 class PaintClass :
 	public Direct2DPaint
 #else

@@ -5,6 +5,7 @@
 #include <string>
 #pragma comment(lib, "shlwapi.lib")
 
+
 enum DrawingMode
 {
 	Fullscreen,
@@ -51,7 +52,7 @@ struct Size
 using MouseEventFn = auto(*) (MouseButton mb, Position p) -> void;
 using Mouse = char;
 
-class BasePaint
+class __declspec(dllexport) BasePaint
 {
 private:
 	HWND hWnd;
@@ -98,7 +99,7 @@ public:
 	virtual void Setup() = 0;
 	virtual void Render() = 0;
 
-	
+
 	inline void SetDrawingMode(DrawingMode mode);
 
 
@@ -117,7 +118,7 @@ public:
 	virtual void SetBackground(COLORREF color = 0) = 0;
 	virtual void Rectangle(int x, int y, int width, int height, COLORREF pen) = 0;
 	virtual void Rectangle(int x, int y, int width, int height, COLORREF pen, COLORREF brush) = 0;
-	
+
 	virtual void Ellipse(int x, int y, int width, int height, COLORREF pen) = 0;
 	virtual void Ellipse(int x, int y, int width, int height, COLORREF pen, COLORREF brush) = 0;
 
@@ -160,7 +161,7 @@ inline HDC BasePaint::GetWindowDC() const
 	return this->hdc;
 }
 
-inline void BasePaint::SetWindowHandle(const HWND hWnd )
+inline void BasePaint::SetWindowHandle(const HWND hWnd)
 {
 	this->hWnd = hWnd;
 	this->hdc = GetDC(hWnd);

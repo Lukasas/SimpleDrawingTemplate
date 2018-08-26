@@ -3,7 +3,7 @@
 HRESULT Direct2DPaint::CreateDeviceIndependentResources()
 {
 	HRESULT hr = S_OK;
-	
+
 	// Create a Direct2D factory.
 	hr = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &m_pDirect2dFactory);
 
@@ -30,7 +30,7 @@ HRESULT Direct2DPaint::CreateDeviceResources()
 		D2D1::HwndRenderTargetProperties(this->GetWindowHandle(), size),
 		&m_pRenderTarget
 	);
-		
+
 
 	m_pRenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
 
@@ -41,7 +41,7 @@ HRESULT Direct2DPaint::CreateDeviceResources()
 
 	// Error Check HR
 	hr = m_pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Black), &m_pBrush);
-	
+
 
 	return hr;
 }
@@ -96,7 +96,7 @@ void Direct2DPaint::RecalculateWindowSizes()
 void Direct2DPaint::Paint()
 {
 	HRESULT hr = S_OK;
-	
+
 
 	if (SUCCEEDED(hr))
 	{
@@ -105,7 +105,7 @@ void Direct2DPaint::Paint()
 		m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 		BasePaint::Paint();
-		
+
 		if (m_showFPS)
 			DrawFPSCounter();
 		hr = m_pRenderTarget->EndDraw();
@@ -120,7 +120,7 @@ void Direct2DPaint::Paint()
 
 void Direct2DPaint::SetupRenderer()
 {
-	
+
 }
 
 void Direct2DPaint::Line(int startX, int startY, int endX, int endY, COLORREF color)

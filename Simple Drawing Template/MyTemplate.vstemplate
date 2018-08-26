@@ -1,0 +1,33 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Simple Drawing Template</Name>
+    <Description>Wrapper for easy drawing with C++ WinAPI. Currently Drawing with Direct2D.</Description>
+    <ProjectType>VC</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <CreateInPlace>true</CreateInPlace>
+    <DefaultName>SimpleDrawingTemplate</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="SimpleDrawingTemplate.vcxproj" File="SimpleDrawingTemplate.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="false" TargetFileName="$projectname$.vcxproj.filters">SimpleDrawingTemplate.vcxproj.filters</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="main.cpp">main.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" OpenInEditor="true" TargetFileName="PaintClass.cpp">PaintClass.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="PaintClass.h">PaintClass.h</ProjectItem>
+      <Folder Name="Drawing" TargetFolderName="Drawing">
+        <ProjectItem ReplaceParameters="true" TargetFileName="BasePaint.h">BasePaint.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Direct2DPaint.h">Direct2DPaint.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="GdiPaint.h">GdiPaint.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="GdiPlusPaint.h">GdiPlusPaint.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SDT.dll">SDT.dll</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SDT.lib">SDT.lib</ProjectItem>
+      </Folder>
+    </Project>
+  </TemplateContent>
+</VSTemplate>
