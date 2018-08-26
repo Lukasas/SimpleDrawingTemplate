@@ -55,6 +55,11 @@ void BasePaint::RegisterMouseEvent(MouseEventFn f, MouseEvent event)
 
 void BasePaint::SendMousePressEvent(MouseButton mb, MouseEvent event, Position p)
 {
+	if (this->fDown != NULL || this->fUp != NULL)
+	{
+		p.x = p.x * GetPaintingWidth() / GetWindowWidth();
+		p.y = p.y * GetPaintingHeight() / GetWindowHeight();
+	}
 	if (event == MouseDown)
 	{
 		if (this->fDown != NULL)
