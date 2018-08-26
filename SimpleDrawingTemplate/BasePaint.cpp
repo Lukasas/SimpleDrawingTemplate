@@ -8,6 +8,7 @@ BasePaint::BasePaint(HWND hWnd)
 	fDown = NULL;
 	fUp = NULL;
 	m_redrawinterval = 16;
+	this->paintingWidth = this->paintingHeight = 0;
 }
 
 void BasePaint::ResizePainting(const int width, const int height)
@@ -28,8 +29,6 @@ void BasePaint::RecalculateWindowSizes()
 	GetClientRect(this->hWnd, &this->windowRect);
 	this->width = this->windowRect.right - this->windowRect.left;
 	this->height = this->windowRect.bottom - this->windowRect.top;
-	this->paintingWidth = this->width;
-	this->paintingHeight = this->height;
 	if (this->eDraw == Fullscreen)
 	{
 		this->ResizePainting(this->width, this->height);
