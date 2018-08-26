@@ -51,6 +51,8 @@ void Direct2DPaint::DiscardDeviceResource()
 	SafeRelease(&m_pBrush);
 	SafeRelease(&m_pDirect2dFactory);
 	SafeRelease(&m_pRenderTarget);
+	SafeRelease(&m_pWriteFactory);
+	SafeRelease(&m_pTextFormat);
 }
 
 void Direct2DPaint::DrawFPSCounter()
