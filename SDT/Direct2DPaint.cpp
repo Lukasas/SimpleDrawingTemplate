@@ -53,6 +53,7 @@ void Direct2DPaint::DiscardDeviceResource()
 	SafeRelease(&m_pRenderTarget);
 	SafeRelease(&m_pWriteFactory);
 	SafeRelease(&m_pTextFormat);
+	SafeRelease(&m_pBitmapPixelBuffer);
 }
 
 void Direct2DPaint::DrawFPSCounter()
@@ -71,7 +72,8 @@ Direct2DPaint::Direct2DPaint(HWND hWnd) :
 	m_pRenderTarget(NULL),
 	m_pTextFormat(NULL),
 	m_pWriteFactory(NULL),
-	m_showFPS(false)
+	m_showFPS(false),
+	m_pBitmapPixelBuffer(NULL)
 {
 	CreateDeviceIndependentResources();
 	CreateDeviceResources();
@@ -105,7 +107,7 @@ void Direct2DPaint::Paint()
 		m_pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 
 		BasePaint::Paint();
-
+	
 		if (m_showFPS)
 			DrawFPSCounter();
 		hr = m_pRenderTarget->EndDraw();
@@ -180,4 +182,11 @@ void Direct2DPaint::Text(const std::wstring & text, const Position & pos, COLORR
 void Direct2DPaint::SetBrushColor(COLORREF color)
 {
 	m_pBrush->SetColor(D2D1::ColorF(color));
+}
+
+void Direct2DPaint::Pixels(const unsigned int pixels[], const Position & pos, const Size & size)
+{
+	m_pRenderTarget->CreateBitmap(D2D1::SizeU(size.width, size.height), pixels, size.width * 4, D2D1::BitmapProperties(m_pRenderTarget->GetPixelFormat()), &m_pBitmapPixelBuffer);
+	m_pRenderTarget->DrawBitmap(m_pBitmapPixelBuffer, D2D1::RectF(pos.x, pos.y, pos.x + size.width, pos.y + size.height));
+	SafeRelease(&m_pBitmapPixelBuffer);
 }

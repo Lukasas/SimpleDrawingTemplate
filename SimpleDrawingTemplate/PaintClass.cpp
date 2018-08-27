@@ -6,7 +6,7 @@ void PaintClass::Setup()
 }
 
 void PaintClass::Render()
-{
+{	
 	// Draw Something Amazing !
 
 }

@@ -19,6 +19,8 @@ private:
 	ID2D1Factory * m_pDirect2dFactory;
 	ID2D1HwndRenderTarget * m_pRenderTarget;
 	ID2D1SolidColorBrush * m_pBrush;
+	ID2D1Bitmap	* m_pBitmapPixelBuffer;
+
 
 	// FPS stats
 	std::chrono::time_point<std::chrono::steady_clock> start;
@@ -59,11 +61,16 @@ public:
 	virtual void Ellipse(int x, int y, int width, int height, COLORREF pen, COLORREF brush);
 
 	virtual void Text(const std::wstring & text, const Position & pos, COLORREF pen);
+	
+	// Test Feature
+	void Pixels(const unsigned int pixels[], const Position & pos, const Size & size);
 
 
 	void SetBrushColor(COLORREF color);
 
 	inline void ShowFPSCounter(bool show);
+
+	
 };
 
 template<class Interface>
