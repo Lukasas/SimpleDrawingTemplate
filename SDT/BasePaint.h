@@ -21,8 +21,9 @@ enum MouseButton
 
 enum MouseEvent
 {
-	MouseDown,
-	MouseUp
+	MouseDownEvent,
+	MouseUpEvent,
+	MouseWheelEvent
 };
 
 struct Position
@@ -49,27 +50,29 @@ struct Size
 };
 
 
+using MouseWheelEventFn = auto(*) (Position p, int deltaWheel) -> void;
 using MouseEventFn = auto(*) (MouseButton mb, Position p) -> void;
 using Mouse = char;
 
 class __declspec(dllexport) BasePaint
 {
 private:
-	HWND hWnd;
-	HDC hdc;
-	RECT windowRect;
+	HWND m_hWnd;
+	HDC m_hdc;
+	RECT m_windowRect;
 
-	MouseEventFn fDown;
-	MouseEventFn fUp;
+	MouseEventFn m_fDown;
+	MouseEventFn m_fUp;
+	MouseWheelEventFn m_fMw;
 
-	int width;
-	int height;
+	int m_windowWidth;
+	int m_windowHeight;
 
-	int paintingWidth;
-	int paintingHeight;
+	int m_paintingWidth;
+	int m_paintingHeight;
 
 
-	DrawingMode eDraw;
+	DrawingMode m_eDraw;
 
 	int m_redrawinterval;
 protected:
@@ -104,8 +107,8 @@ public:
 
 
 	void RegisterMouseEvent(MouseEventFn f, MouseEvent event);
-
-	void SendMousePressEvent(MouseButton mb, MouseEvent event, Position p);
+	void RegisterMouseEvent(MouseWheelEventFn f, MouseEvent event);
+	void SendMousePressEvent(MouseButton mb, MouseEvent event, Position p, int deltaMouse = 0);
 
 	virtual void Paint();
 
@@ -127,50 +130,50 @@ public:
 
 int BasePaint::GetWindowWidth() const
 {
-	return this->width;
+	return this->m_windowWidth;
 }
 
 int BasePaint::GetWindowHeight() const
 {
-	return this->height;
+	return this->m_windowHeight;
 }
 
 int BasePaint::GetPaintingWidth() const
 {
-	return this->paintingWidth;
+	return this->m_paintingWidth;
 }
 
 int BasePaint::GetPaintingHeight() const
 {
-	return this->paintingHeight;
+	return this->m_paintingHeight;
 }
 
 
 inline RECT BasePaint::WindowRect()
 {
-	return this->windowRect;
+	return this->m_windowRect;
 }
 
 inline HWND BasePaint::GetWindowHandle() const
 {
-	return this->hWnd;
+	return this->m_hWnd;
 }
 
 inline HDC BasePaint::GetWindowDC() const
 {
-	return this->hdc;
+	return this->m_hdc;
 }
 
 inline void BasePaint::SetWindowHandle(const HWND hWnd)
 {
-	this->hWnd = hWnd;
-	this->hdc = GetDC(hWnd);
+	this->m_hWnd = hWnd;
+	this->m_hdc = GetDC(hWnd);
 	RecalculateWindowSizes();
 }
 
 inline void BasePaint::SetDrawingMode(DrawingMode mode)
 {
-	this->eDraw = mode;
+	this->m_eDraw = mode;
 }
 
 

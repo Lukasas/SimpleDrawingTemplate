@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <windowsx.h>
 #include "PaintClass.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -54,12 +55,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_RBUTTONDOWN:
 	case WM_MBUTTONDOWN:
 	case WM_LBUTTONDOWN:
-		cBasePaint->SendMousePressEvent((MouseButton)message, MouseDown, Position(LOWORD(lParam), HIWORD(lParam)));
+		cBasePaint->SendMousePressEvent((MouseButton)message, MouseDownEvent, Position(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)));
 		break;
 	case WM_MBUTTONUP:
 	case WM_LBUTTONUP:
 	case WM_RBUTTONUP:
-		cBasePaint->SendMousePressEvent((MouseButton)(message - 1), MouseUp, Position(LOWORD(lParam), HIWORD(lParam)));
+		cBasePaint->SendMousePressEvent((MouseButton)(message - 1), MouseUpEvent, Position(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)));
+		break;
+	case WM_MOUSEWHEEL:
+		cBasePaint->SendMousePressEvent((MouseButton)0, MouseWheelEvent, Position(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)), GET_WHEEL_DELTA_WPARAM(wParam));
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);

@@ -2,19 +2,20 @@
 
 
 
-BasePaint::BasePaint(HWND hWnd)
+BasePaint::BasePaint(HWND hWnd) :
+	m_fDown(NULL),
+	m_fUp(NULL),
+	m_fMw(NULL)
 {
 	SetWindowHandle(hWnd);
-	fDown = NULL;
-	fUp = NULL;
 	m_redrawinterval = 16;
-	this->paintingWidth = this->paintingHeight = 0;
+	this->m_paintingWidth = this->m_paintingHeight = 0;
 }
 
 void BasePaint::ResizePainting(const int width, const int height)
 {
-	this->paintingWidth = width;
-	this->paintingHeight = height;
+	this->m_paintingWidth = width;
+	this->m_paintingHeight = height;
 }
 
 
@@ -26,52 +27,64 @@ void BasePaint::Cleanup()
 
 void BasePaint::RecalculateWindowSizes()
 {
-	GetClientRect(this->hWnd, &this->windowRect);
-	this->width = this->windowRect.right - this->windowRect.left;
-	this->height = this->windowRect.bottom - this->windowRect.top;
-	if (this->eDraw == Fullscreen)
+	GetClientRect(this->m_hWnd, &this->m_windowRect);
+	this->m_windowWidth = this->m_windowRect.right - this->m_windowRect.left;
+	this->m_windowHeight = this->m_windowRect.bottom - this->m_windowRect.top;
+	if (this->m_eDraw == Fullscreen)
 	{
-		this->ResizePainting(this->width, this->height);
+		this->ResizePainting(this->m_windowWidth, this->m_windowHeight);
 	}
 }
 
 BasePaint::~BasePaint()
 {
 	Cleanup();
-	ReleaseDC(this->hWnd, hdc);
+	ReleaseDC(this->m_hWnd, m_hdc);
 }
 
 void BasePaint::RegisterMouseEvent(MouseEventFn f, MouseEvent event)
 {
-	if (event == MouseDown)
+	if (event == MouseDownEvent)
 	{
-		this->fDown = f;
+		this->m_fDown = f;
 	}
-	else if (event == MouseUp)
+	else if (event == MouseUpEvent)
 	{
-		this->fUp = f;
+		this->m_fUp = f;
 	}
 }
 
-void BasePaint::SendMousePressEvent(MouseButton mb, MouseEvent event, Position p)
+void BasePaint::RegisterMouseEvent(MouseWheelEventFn f, MouseEvent event)
 {
-	if (this->fDown != NULL || this->fUp != NULL)
+	this->m_fMw = f;
+}
+
+void BasePaint::SendMousePressEvent(MouseButton mb, MouseEvent event, Position p, int deltaMouse)
+{
+	if (this->m_fDown != NULL || this->m_fUp != NULL)
 	{
 		p.x = p.x * GetPaintingWidth() / GetWindowWidth();
 		p.y = p.y * GetPaintingHeight() / GetWindowHeight();
 	}
-	if (event == MouseDown)
+	if (event == MouseDownEvent)
 	{
-		if (this->fDown != NULL)
+		if (this->m_fDown != NULL)
 		{
-			this->fDown(mb, p);
+			this->m_fDown(mb, p);
 		}
 	}
-	else if (event == MouseUp)
+	else if (event == MouseUpEvent)
 	{
-		if (this->fUp != NULL)
+		if (this->m_fUp != NULL)
 		{
-			this->fUp(mb, p);
+			this->m_fUp(mb, p);
+		}
+	}
+	else if (event == MouseWheelEvent)
+	{
+		if (this->m_fMw != NULL)
+		{
+			this->m_fMw(p, deltaMouse);
 		}
 	}
 }
