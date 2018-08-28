@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <Shlwapi.h>
 #include <string>
+#include <random>
 #pragma comment(lib, "shlwapi.lib")
 
 
