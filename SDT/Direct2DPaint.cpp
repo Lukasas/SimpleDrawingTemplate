@@ -117,6 +117,7 @@ void Direct2DPaint::Paint()
 	{
 		hr = S_OK;
 		DiscardDeviceResource();
+		CreateDeviceResources();
 	}
 }
 
