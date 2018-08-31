@@ -165,7 +165,7 @@ void Direct2DPaint::Ellipse(int x, int y, int width, int height, COLORREF pen)
 void Direct2DPaint::Ellipse(int x, int y, int width, int height, COLORREF pen, COLORREF brush)
 {
 	SetBrushColor(brush);
-	m_pRenderTarget->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(x + width / 2.0f, y + height / 2.0f), width / 2.0f, height / 2.f), m_pBrush);
+	m_pRenderTarget->FillEllipse(D2D1::Ellipse(D2D1::Point2F(x + width / 2.0f, y + height / 2.0f), width / 2.0f, height / 2.f), m_pBrush);
 	Ellipse(x, y, width, height, pen);
 }
 
