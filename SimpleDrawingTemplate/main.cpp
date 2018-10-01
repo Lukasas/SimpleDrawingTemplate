@@ -65,6 +65,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_MOUSEWHEEL:
 		cBasePaint->SendMousePressEvent((MouseButton)0, MouseWheelEvent, Position(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)), GET_WHEEL_DELTA_WPARAM(wParam));
 		break;
+	case WM_KEYDOWN:
+		cBasePaint->SendKeyboardPressEvent(wParam, KeyboardDownEvent);
+		return 0;
+		break;
+	case WM_KEYUP:
+		cBasePaint->SendKeyboardPressEvent(wParam, KeyboardUpEvent);
+		return 0;
+		break;
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;

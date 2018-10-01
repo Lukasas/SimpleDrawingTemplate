@@ -5,7 +5,9 @@
 BasePaint::BasePaint(HWND hWnd) :
 	m_fDown(NULL),
 	m_fUp(NULL),
-	m_fMw(NULL)
+	m_fMw(NULL),
+	m_keyfDown(NULL),
+	m_keyfUp(NULL)
 {
 	SetWindowHandle(hWnd);
 	m_redrawinterval = 16;
@@ -85,6 +87,36 @@ void BasePaint::SendMousePressEvent(MouseButton mb, MouseEvent event, Position p
 		if (this->m_fMw != NULL)
 		{
 			this->m_fMw(p, deltaMouse);
+		}
+	}
+}
+
+void BasePaint::RegisterKeyboardEvent(KeyboardEventFn f, KeyboardEvent event)
+{
+	if (event == KeyboardDownEvent)
+	{
+		this->m_keyfDown = f;
+	}
+	else if (event == KeyboardUpEvent)
+	{
+		this->m_keyfUp = f;
+	}
+}
+
+void BasePaint::SendKeyboardPressEvent(int VK_KEY, KeyboardEvent event)
+{
+	if (event == KeyboardDownEvent)
+	{
+		if (this->m_keyfDown != NULL)
+		{
+			this->m_keyfDown(VK_KEY);
+		}
+	}
+	else if (event == KeyboardUpEvent)
+	{
+		if (this->m_keyfUp != NULL)
+		{
+			this->m_keyfUp(VK_KEY);
 		}
 	}
 }

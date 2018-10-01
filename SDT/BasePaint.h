@@ -27,6 +27,12 @@ enum MouseEvent
 	MouseWheelEvent
 };
 
+enum KeyboardEvent
+{
+	KeyboardDownEvent,
+	KeyboardUpEvent
+};
+
 struct Position
 {
 	size_t x = 0;
@@ -55,6 +61,8 @@ using MouseWheelEventFn = auto(*) (Position p, int deltaWheel) -> void;
 using MouseEventFn = auto(*) (MouseButton mb, Position p) -> void;
 using Mouse = char;
 
+using KeyboardEventFn = auto(*) (int VK_KEY) -> void;
+
 class __declspec(dllexport) BasePaint
 {
 private:
@@ -65,6 +73,9 @@ private:
 	MouseEventFn m_fDown;
 	MouseEventFn m_fUp;
 	MouseWheelEventFn m_fMw;
+
+	KeyboardEventFn m_keyfDown;
+	KeyboardEventFn m_keyfUp;
 
 	int m_windowWidth;
 	int m_windowHeight;
@@ -110,6 +121,9 @@ public:
 	void RegisterMouseEvent(MouseEventFn f, MouseEvent event);
 	void RegisterMouseEvent(MouseWheelEventFn f, MouseEvent event);
 	void SendMousePressEvent(MouseButton mb, MouseEvent event, Position p, int deltaMouse = 0);
+
+	void RegisterKeyboardEvent(KeyboardEventFn f, KeyboardEvent event);
+	void SendKeyboardPressEvent(int VK_KEY, KeyboardEvent event);
 
 	virtual void Paint();
 
